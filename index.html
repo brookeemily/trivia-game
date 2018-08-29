@@ -1,0 +1,103 @@
+<!-- You'll create a trivia form with multiple choice or true/false options (your choice).
+
+The player will have a limited amount of time to finish the quiz. 
+
+
+The game ends when the time runs out. The page will reveal the number of questions that players answer correctly and incorrectly.
+
+
+Don't let the player pick more than one answer per question.
+Don't forget to include a countdown timer. -->
+
+<!-- MAIN COMPONENTS NEEDED -->
+
+
+
+<!-- QUIZ QUESTIONS -->
+<!-- Create multiple choice questions using javascript -->
+<!-- create an array of question objects & make a program that goes through the array -->
+
+
+<!-- Add timer -->
+
+<!-- Have program check if the answers are correct -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>What is Patrick Stump Saying?</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+
+</head>
+
+<body>
+
+    <div id="quiz-container">
+
+        <div id="header">
+            <!-- Title -->
+            <h1>This is a Quiz!</h1>
+
+             <!-- Timer  -->
+            <div id="timer">00:30</div>
+        </div>
+
+        <!-- QUIZ CONTENT -->
+
+        <!-- Results DIV -->
+        <div id="results"></div>
+        
+        <!-- The quiz itself! -->
+        <!-- When the form is submitted, return from submitAnswers -->
+        <form name="quizForm" onsubmit="return submitAnswers()">
+            <h3> 1. Here is the question! </h3>
+            <input type="radio" name="q1" value="a" id="q1a">Here is the answer!
+            <input type="radio" name="q1" value="b" id="q1b">This is not the answer!
+            <input type="radio" name="q1" value="c" id="q1c">This is not the answer!
+            <input type="radio" name="q1" value="d" id="q1d">This is not the answer!
+
+            <h3> 2. Here is the question! </h3>
+            <input type="radio" name="q2" value="a" id="q2a">This is not the answer!
+            <input type="radio" name="q2" value="b" id="q2b">This is not the answer!
+            <input type="radio" name="q2" value="c" id="q2c">Here is the answer!
+            <input type="radio" name="q2" value="d" id="q2d">This is not the answer!
+
+            <h3> 3. Here is the question! </h3>
+            <input type="radio" name="q3" value="a" id="q3a">Here is the answer!
+            <input type="radio" name="q3" value="b" id="q3b">This is not the answer!
+            <input type="radio" name="q3" value="c" id="q3c">This is not the answer!
+            <input type="radio" name="q3" value="d" id="q3d">This is not the answer!
+
+            <h3> 4. Here is the question! </h3>
+            <input type="radio" name="q4" value="a" id="q4a">This is not the answer!
+            <input type="radio" name="q4" value="b" id="q4b">This is not the answer!
+            <input type="radio" name="q4" value="c" id="q4c">This is not the answer!
+            <input type="radio" name="q4" value="d" id="q4d">Here is the answer!
+
+            <h3> 5. Here is the question! </h3>
+            <input type="radio" name="q5" value="a" id="q5a">This is not the answer!
+            <input type="radio" name="q5" value="b" id="q5b">Here is the answer!
+            <input type="radio" name="q5" value="c" id="q5c">This is not the answer!
+            <input type="radio" name="q5" value="d" id="q5d">This is not the answer!
+
+            <br><br>
+            <input type="submit" value="Submit Answers">
+        </form>
+
+
+
+
+
+
+        <!-- jQuery -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+        <!-- Script -->
+        <script type="text/javascript" src="assets/javascript/app.js"></script>
+</body>
+
+</html>
