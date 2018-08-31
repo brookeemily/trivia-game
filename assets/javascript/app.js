@@ -1,173 +1,355 @@
 // <!-- MAIN COMPONENTS NEEDED -->
 
-
 // <!-- START BUTTON -->
 
 // THIS IS THE TIMER
 
 // Starts timer on load
+//Variable for timer
+var time = 0;
+
+
+var converted = timeConverter(time);
+$("#timer").text(converted);
+
+// Display when page loads
 window.onload = function() {
+  // Hide all content except start button
+  $("#content").hide();
+  $("#timer").hide();
+  $("#results").hide();
+};
+
+//When you click the start button....
+$("#start").click(function() {
+  // Set timer
+  time = 5;
+
+  // Hide the start button
+  $("#start").hide();
+
+  // Begin timer
   start();
   count();
+
+  // Display the first question
+  displayQuestions();
+  displayChoices();
+
+});
+
+
+
+// CREATE QUIZ
+
+var currentQuestion = 0;
+var right = 0;
+var wrong = 0;
+
+
+// // Create an array that contains the questions & answers
+var quizItems = [{
+  question: "This is a question",
+  
+  // add sound to each question?
+
+  choices: [
+      "This is an answer",
+      "This is an answer",
+      "This is THE answer",
+      "This is an answer"
+    ]},{
+    question: "This is a question 2",
+    // add sound to each question?
+    choices: [
+      "This is an answer 2",
+      "This is an answer 2",
+      "This is THE answer 2",
+      "This is an answer 2"
+    ]
+  },
+  {
+    question: "This is a question 3",
+    // add sound to each question?
+    choices: [
+      "This is an answer 3",
+      "This is an answer 3",
+      "This is THE answer 3",
+      "This is an answer 3"
+    ]
+  },
+  {
+    question: "This is a question 4",
+    // add sound to each question?
+    choices: [
+      "This is an answer 4",
+      "This is an answer 4",
+      "This is THE answer 4",
+      "This is an answer 4"
+    ]
+  },
+  {
+    question: "This is a question 5",
+    // add sound to each question?
+    choices: [
+      "This is an answer 5",
+      "This is an answe 5r",
+      "This is THE answer 5",
+      "This is an answer 5"
+    ]
+  }
+];
+
+function displayQuestions () {
+
+for (var i = 0; i < quizItems.length; i++) {
+//  console.log(quizItems.length);
+ console.log(quizItems[0].question);
+$("#question").text(quizItems[0].question);
+
+
+
+ 
+// }
+
+}
 }
 
-//Variable for timer
-var time = 30;
+function displayChoices() {
+  for (var a = 0; a < quizItems.choices.length; a++) {
+
+  console.log(quizItems[0].choices[a]);
+$("#answers").text(quizItems[0].choices[a]);
+}
+}
+//write some JS to iterate over the js object and populate the html elements with the question data
+// Use a for loop to move through that array when the game has started
+
+// When the user selects an answer or when time is up, show the answer
+// Show the answer for 15(?) seconds
+// Go to the next question
+
+// track state. You'll want to know how many questions the user has answered and what their answers were. 
+// Again, I'd recommend setting up an object to track state and update it as you go.
+    // { nextQuestion: 1, answers: [1,3,1,2] }
+
+// Functions that display each question
+
+// Show question 1
+// function displayQuestions() {
+  
+//     for (i = 0; i < quizItems.length; i++) {
+//       $("#question").empty();
+//       $("#question").text(quizItems[i].question);
+      
+//         // console.log("quiz items " + quizItems[i].choices);
+//         // console.log("quiz items " + quizItems[1].choices);
+
+//     }
+//   }
+
+
+
+// function gameOver() {
+//   stop();
+//   submitAnswers();
+//   $("#timer").hide();
+//   $("#results").show();
+//   $("#right").append(right);
+//   $("#wrong").append(wrong);
+
+//   $("#question5").hide();
+//   $("#question1").hide();
+//   $("#question2").hide();
+//   $("#question3").hide();
+//   $("#question4").hide();
+// }
+// // Resets when time hits 0
+//    if (time === 0) {
+//     stop();
+//     time = 0;
+//     $("#timer").empty();
+//     $("#timer").append("TIME'S UP :~(");
+
+//     $("#content").empty();
+//     $("#content").append(
+//       "this is where your results will appear! *change to the variable results*"
+//     );
+//   }
+
+// TIMER FUNCTIONS
 
 // Reset function for timer
 function reset() {
-
-// Start time at 0
-  time = 30;
-  $("#timer").text("0:30");
-
+  // Start time at 30 seconds
+  time = 5;
+  $("#timer").text("00:05");
+  $("#question").empty();
+  $("#answers").empty();
 }
 
 // Function starts timer
 function start() {
   intervalId = setInterval(count, 1000);
+  $("#timer").show("0:05");
 }
 
 // Function stops timer
 function stop() {
-
   console.log("stopping");
   clearInterval(intervalId);
-
 }
-
 
 // Makes the timer count time
 function count() {
+  time--;
+  var converted = timeConverter(time);
+  $("#timer").text(converted);
 
-    time--;
-    var converted = timeConverter(time);
-    $("#timer").text(converted);
-  
+  // if (time === 0) {
+  //   stop();
+  //   reset();
+  //   start();
+  //   displayQuestions();
+  // }
+}
+
+// Converts timer
+function timeConverter(t) {
+  var minutes = Math.floor(t / 60);
+  var seconds = t - minutes * 60;
+
+  if (seconds < 10) {
+    seconds = "0" + seconds;
   }
-  
 
-  // Converts timer
-  function timeConverter(t) {
-  
-    var minutes = Math.floor(t / 60);
-    var seconds = t - (minutes * 60);
-  
-    if (seconds < 10) {
-      seconds = "0" + seconds;
-    }
-  
-    if (minutes === 0) {
-      minutes = "00";
-    }
-    else if (minutes < 10) {
-      minutes = "0" + minutes;
-    }
-  
-    return minutes + ":" + seconds;
+  if (minutes === 0) {
+    minutes = "00";
+  } else if (minutes < 10) {
+    minutes = "0" + minutes;
   }
-  
 
-  // <!-- QUIZ QUESTIONS -->
-
-
-// When you click on the submit button
-// $("#submit").click(function() {
-function submitAnswers(){
-    
-    var total = 5;
-    var right = 0;
-    var wrong = 0;
+  return minutes + ":" + seconds;
+}
 
 
-    // Get user input
-    var q1 = document.forms["quizForm"]["q1"].value;
-    var q2 = document.forms["quizForm"]["q2"].value;
-    var q3 = document.forms["quizForm"]["q3"].value;
-    var q4 = document.forms["quizForm"]["q4"].value;
-    var q5 = document.forms["quizForm"]["q5"].value;
+//    // Check answers
+//    if (q1 === answers[0]) {
+//     console.log("question1 correct!");
+//     right++;
+//   }
+//   if (q1 !== answers[0]) {
+//     console.log("question1 incorrect :(");
+//     wrong++;
+//   }
+//   // FIGURE OUT HOW TO SEE IF THEY MISSED QUESTIONS
+//   // if (q1 === null) {
+//   //     alert("question missed!");
 
+//   // }
 
-    // Set correct answers (create an array that contains the correct answers for each question)
-    var answers =["a", "c", "a", "d", "b"];
+//   if (q2 === answers[1]) {
+//     console.log("question2 correct!");
+//     right++;
+//   }
+//   if (q2 !== answers[1]) {
+//     console.log("question2 incorrect :(");
+//     wrong++;
+//   }
 
-    // Check answers
-    if (q1 === answers[0]) {
-        alert("question1 correct!");
-        right++;
-        alert(right);
-    }  if (q1 !== answers[0]) {
-        alert("question1 incorrect :(");
-        wrong++;
-       alert(wrong);
-    }  
-    // FIGURE OUT HOW TO SEE IF THEY MISSED QUESTIONS
-    // if (q1 === null) {
-    //     alert("question missed!");
+//   if (q3 === answers[2]) {
+//     console.log("question3 correct!");
+//     right++;
+//   }
+//   if (q3 !== answers[2]) {
+//     console.log("question3 incorrect :(");
 
-    // }
-    
-    if (q2 === answers[1]) {
-        alert("question2 correct!");
-        right++;
-        alert("wrong: " + wrong);
-        alert("right: " + right);
-    }  if (q2 !== answers[1]) {
-        alert("question2 incorrect :(");
-        wrong++;
-        alert("wrong: " + wrong);
-        alert("right: " + right);
-    } 
-    
-    if (q3 === answers[2]) {
-        alert("question3 correct!");
-        right++;
-        alert("wrong: " + wrong);
-        alert("right: " + right);
-    }  if (q3 !== answers[2]) {
-        alert("question3 incorrect :(");
-        wrong++;
-        alert("wrong: " + wrong);
-        alert("right: " + right);
-    }  
-    if (q4 === answers[3]) {
-        alert("question4 correct!");
-        right++;
-        alert("wrong: " + wrong);
-       alert("right: " + right);
-    }  if (q4 !== answers[3]) {
-        alert("question4 incorrect :(");
-        wrong++;
-        alert("wrong: " + wrong);
-        alert("right: " + right);
-    }  
+//     wrong++;
+//   }
+//   if (q4 === answers[3]) {
+//     console.log("question4 correct!");
+//     right++;
+//   }
+//   if (q4 !== answers[3]) {
+//     console.log("question4 incorrect :(");
+//     wrong++;
+//   }
 
-    if (q5 === answers[4]) {
-        alert("question5 correct!");
-        right++;
-        alert("wrong: " + wrong);
-        alert("right: " + right);
-    }  if (q5 !== answers[4]) {
-        alert("question5 incorrect :(");
-        wrong++;
-       alert("wrong: " + wrong);
-       alert("right: " + right);
-    }  
-} 
+//   if (q5 === answers[4]) {
+//     console.log("question5 correct!");
+//     right++;
+//   }
+//   if (q5 !== answers[4]) {
+//     console.log("question5 incorrect :(");
+//     wrong++;
+//   }
+// }
+// );
+
+// function checkAnswers() {
+//   // Check answers
+//   if (q1 === answers[0]) {
+//     console.log("question1 correct!");
+//     right++;
+//   }
+//   if (q1 !== answers[0]) {
+//     console.log("question1 incorrect :(");
+//     wrong++;
+//   }
+//   // FIGURE OUT HOW TO SEE IF THEY MISSED QUESTIONS
+//   // if (q1 === null) {
+//   //     alert("question missed!");
+
+//   // }
+
+//   if (q2 === answers[1]) {
+//     console.log("question2 correct!");
+//     right++;
+//   }
+//   if (q2 !== answers[1]) {
+//     console.log("question2 incorrect :(");
+//     wrong++;
+//   }
+
+//   if (q3 === answers[2]) {
+//     console.log("question3 correct!");
+//     right++;
+//   }
+//   if (q3 !== answers[2]) {
+//     console.log("question3 incorrect :(");
+
+//     wrong++;
+//   }
+//   if (q4 === answers[3]) {
+//     console.log("question4 correct!");
+//     right++;
+//   }
+//   if (q4 !== answers[3]) {
+//     console.log("question4 incorrect :(");
+//     wrong++;
+//   }
+
+//   if (q5 === answers[4]) {
+//     console.log("question5 correct!");
+//     right++;
+//   }
+//   if (q5 !== answers[4]) {
+//     console.log("question5 incorrect :(");
+//     wrong++;
+//   }
+// }
+
 // // Check if answer for each question is correct
 
-// if ( === correct 
+// if ( === correct
 //     // right++
 // // if player one !== correct
 //     // wrong++
 
-
-
 // });
 
-
 // GAME OVER PAGE
-// if the time = 0, go to the game over page
-    //  use a foor loop for this
+// if the time = 0, append results
+//  use a foor loop for this
 // display results
 // replay //
