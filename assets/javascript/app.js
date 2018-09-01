@@ -7,18 +7,19 @@
 // Starts timer on load
 //Variable for timer
 var time = 0;
+var currentQuestion = 0;
 
 
 var converted = timeConverter(time);
+
 $("#timer").text(converted);
 
-// Display when page loads
-window.onload = function() {
+
   // Hide all content except start button
-  $("#content").hide();
+  $("#question").hide();
   $("#timer").hide();
   $("#results").hide();
-};
+
 
 //When you click the start button....
 $("#start").click(function() {
@@ -27,6 +28,7 @@ $("#start").click(function() {
 
   // Hide the start button
   $("#start").hide();
+
 
   // Begin timer
   start();
@@ -42,7 +44,7 @@ $("#start").click(function() {
 
 // CREATE QUIZ
 
-var currentQuestion = 0;
+// var currentQuestion = 0;
 var right = 0;
 var wrong = 0;
 
@@ -58,7 +60,9 @@ var quizItems = [{
       "This is an answer",
       "This is THE answer",
       "This is an answer"
-    ]},{
+]}
+    
+    ,{
     question: "This is a question 2",
     // add sound to each question?
     choices: [
@@ -100,12 +104,17 @@ var quizItems = [{
   }
 ];
 
+// console.log(quizItems);
+// console.log(quizItems[2].question);
+// console.log(quizItems[3].choices);
+
+
 function displayQuestions () {
 
-for (var i = 0; i < quizItems.length; i++) {
-//  console.log(quizItems.length);
- console.log(quizItems[0].question);
-$("#question").text(quizItems[0].question);
+// for (var i = 0; i < quizItems.length;) {
+console.log(quizItems[currentQuestion].question);
+$("#question").show();
+$("#question").append(quizItems[currentQuestion].question);
 
 
 
@@ -113,15 +122,14 @@ $("#question").text(quizItems[0].question);
 // }
 
 }
-}
+
 
 function displayChoices() {
-  for (var a = 0; a < quizItems.choices.length; a++) {
+  // for (var a = 0; a < quizItems.choices.length; a++) {
 
-  console.log(quizItems[0].choices[a]);
-$("#answers").text(quizItems[0].choices[a]);
+  console.log(quizItems[0].choices);
 }
-}
+
 //write some JS to iterate over the js object and populate the html elements with the question data
 // Use a for loop to move through that array when the game has started
 
@@ -212,6 +220,16 @@ function count() {
   //   start();
   //   displayQuestions();
   // }
+  if (time === 0) {
+    stop();
+    reset();
+    start();
+    currentQuestion++;
+    console.log(quizItems[currentQuestion].question);
+    $("#question").append(quizItems[currentQuestion].question);
+
+    }
+    
 }
 
 // Converts timer

@@ -56,29 +56,23 @@ Don't forget to include a countdown timer. -->
     <!-- Results DIV -->
 
     <!-- The quiz itself! -->
-    <div id="quiz">
-
-        <div id="results">
-            <h1>Game over!</h1>
-            <h3> here's how you did! </h3>
-            <p id="right">right: </p>
-            <p id="wrong">wrong: </p>
-
-        </div>
+    <div id="question"><p id="question"></p></div>
+    <div id="choices"></div>
+    <div id="results"></div> 
   
-    <!-- When the form is submitted, return from submitAnswers -->
+    <!-- When the form is submitted, return from submitAnswers
 
     <form name="quizForm" onsubmit="return submitAnswers()">
             
             <div id="question1">
             <h3> 1. Here is the question! </h3>
-            <input type="submit" name="q1" value="I send my cards early 'cause I know I'm always late.
+            <input type="submit" class="q1" value="I send my cards early 'cause I know I'm always late.
             " id="q1a"> <br> 
-            <input type="submit" name="q1" value="I set my clocks early 'cause I know I'm always late.
+            <input type="submit" class="q1" value="I set my clocks early 'cause I know I'm always late.
             " id="q1b"> <br>
-            <input type="submit" name="q1" value="My salmon comes early cause I know I’m always late
+            <input type="submit" class="q1" value="My salmon comes early cause I know I’m always late
             " id="q1c"> <br>
-            <input type="submit" name="q1" value="Send the cops early cause I know I’m always late
+            <input type="submit" class="q1" value="Send the cops early cause I know I’m always late
             " id="q1d">
             </div>
 
@@ -117,9 +111,7 @@ Don't forget to include a countdown timer. -->
             <input type="radio" name="q5" value="d" id="q5d">This is not the answer!
         </div>
             <br><br>  
-    <!-- <input type="submit" value="Submit Answers"> -->
-    </form>
-</div>
+    </form> -->
 
 
 
@@ -131,7 +123,7 @@ Don't forget to include a countdown timer. -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <!-- Script -->
-    <script type="text/javascript" src="assets/javascript/app-2.js"></script>
+    <script type="text/javascript" src="assets/javascript/app.js"></script>
 </body>
 
 </html>
