@@ -9,6 +9,8 @@
 var time = 0;
 var currentQuestion = 0;
 
+var playerAnswers = [];
+
 
 var converted = timeConverter(time);
 
@@ -31,13 +33,13 @@ $("#start").click(function() {
 
 
   // Begin timer
-  start();
-  count();
+  // start();
+  // count();
 
   // Display the first question
   displayQuestions();
   displayChoices();
-
+  pickAnswer();
 });
 
 
@@ -60,7 +62,11 @@ var quizItems = [{
       "This is an answer",
       "This is THE answer",
       "This is an answer"
-]}
+]},
+
+//   correct: 
+//     "This is THE answer",
+// }
     
     ,{
     question: "This is a question 2",
@@ -112,78 +118,66 @@ var quizItems = [{
 function displayQuestions () {
 
 // for (var i = 0; i < quizItems.length;) {
-console.log(quizItems[currentQuestion].question);
 $("#question").show();
-$("#question").append(quizItems[currentQuestion].question);
-
-
-
+$("#question").text(quizItems[currentQuestion].question);
  
-// }
-
 }
 
 
 function displayChoices() {
   // for (var a = 0; a < quizItems.choices.length; a++) {
+    $("#choices").show();
+    $("#choice1").html(quizItems[currentQuestion].choices[0]);
+    $("#choice2").html(quizItems[currentQuestion].choices[1]);
+    $("#choice3").html(quizItems[currentQuestion].choices[2]);
+    $("#choice4").html(quizItems[currentQuestion].choices[3]);
 
-  console.log(quizItems[0].choices);
+
+
+
+
+// if you click on a choice, push value to new array
+
+    
+  // }
+
 }
 
-//write some JS to iterate over the js object and populate the html elements with the question data
-// Use a for loop to move through that array when the game has started
+function pickAnswer () {
 
-// When the user selects an answer or when time is up, show the answer
-// Show the answer for 15(?) seconds
-// Go to the next question
+  $("#choice1").click(function() {
+    console.log(choice1);
+    nextQuestion();
+ });
 
-// track state. You'll want to know how many questions the user has answered and what their answers were. 
-// Again, I'd recommend setting up an object to track state and update it as you go.
-    // { nextQuestion: 1, answers: [1,3,1,2] }
+$("#choice2").click(function() {
+  console.log(choice2); 
+  nextQuestion();
+});
 
-// Functions that display each question
 
-// Show question 1
-// function displayQuestions() {
+$("#choice3").click(function() {
+  console.log(choice3); 
+  nextQuestion();
+});
+
+  $("#choice4").click(function() {
+    console.log(choice4);   
+    nextQuestion();
+});
+
+
+}
+
+function gameOver() {
+  $("#question").hide();
+  $("#timer").hide();
+  $("#results").hide();
+  $("#choices").hide();
+
   
-//     for (i = 0; i < quizItems.length; i++) {
-//       $("#question").empty();
-//       $("#question").text(quizItems[i].question);
-      
-//         // console.log("quiz items " + quizItems[i].choices);
-//         // console.log("quiz items " + quizItems[1].choices);
 
-//     }
-//   }
-
-
-
-// function gameOver() {
-//   stop();
-//   submitAnswers();
-//   $("#timer").hide();
-//   $("#results").show();
-//   $("#right").append(right);
-//   $("#wrong").append(wrong);
-
-//   $("#question5").hide();
-//   $("#question1").hide();
-//   $("#question2").hide();
-//   $("#question3").hide();
-//   $("#question4").hide();
-// }
-// // Resets when time hits 0
-//    if (time === 0) {
-//     stop();
-//     time = 0;
-//     $("#timer").empty();
-//     $("#timer").append("TIME'S UP :~(");
-
-//     $("#content").empty();
-//     $("#content").append(
-//       "this is where your results will appear! *change to the variable results*"
-//     );
-//   }
+  }
 
 // TIMER FUNCTIONS
 
@@ -195,6 +189,7 @@ function reset() {
   $("#question").empty();
   $("#answers").empty();
 }
+
 
 // Function starts timer
 function start() {
@@ -221,13 +216,7 @@ function count() {
   //   displayQuestions();
   // }
   if (time === 0) {
-    stop();
-    reset();
-    start();
-    currentQuestion++;
-    console.log(quizItems[currentQuestion].question);
-    $("#question").append(quizItems[currentQuestion].question);
-
+    nextQuestion();
     }
     
 }
@@ -250,6 +239,17 @@ function timeConverter(t) {
   return minutes + ":" + seconds;
 }
 
+function nextQuestion() {
+  if (currentQuestion <= 5) {
+    currentQuestion++;
+     displayQuestions();
+     displayChoices();
+  } else {
+    gameOver();
+  }
+  
+
+}
 
 //    // Check answers
 //    if (q1 === answers[0]) {

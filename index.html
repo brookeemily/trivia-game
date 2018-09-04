@@ -40,28 +40,43 @@ Don't forget to include a countdown timer. -->
 <body>
 
 
-    <div id="header">
+    <!-- <div id="header"> -->
         <!-- Title -->
-        <h1>This is a Quiz!</h1>
+        <!-- <h1>What the F*#$ is Patrick Stump Saying?!</h1> -->
 
         <!-- Timer  -->
-        <div id="timer">00:30</div>
+        <!-- <div id="timer">00:30</div> -->
 
-        <button id="start">Start</button>
+        <!-- <button id="start">Start</button> -->
 
-    </div>
+    <!-- </div> -->
 
     <!-- QUIZ CONTENT -->
 
     <!-- Results DIV -->
 
     <!-- The quiz itself! -->
-    <div id="question"><p id="question"></p></div>
-    <div id="choices"></div>
-    <div id="results"></div> 
-  
-    <!-- When the form is submitted, return from submitAnswers
+    <!-- <div id="question"><p id="question"></p></div>  <br>
+    <div id="choices"><p id="choices"></p></div>
+    <div id="results"></div>  -->
+<div id="quiz-container">
 
+        <h1>What the F*#$ is Patrick Stump Saying?!</h1>
+
+        <!-- Timer  -->
+        <div id="timer">00:30</div>
+
+        <button id="start">Start</button>
+        
+    <h3 id="question"></h3>
+    <br>
+    <div id="choices">
+     <p id="choice1"></p> <p id="choice2"></p>    <p id="choice3"></p>  <p id="choice4"></p>
+    
+</div>
+
+    <!-- When the form is submitted, return from submitAnswers
+</div>
     <form name="quizForm" onsubmit="return submitAnswers()">
             
             <div id="question1">

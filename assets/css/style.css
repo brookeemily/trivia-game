@@ -1,8 +1,33 @@
+/* Background pattern from Toptal Subtle Patterns */
+
+
+
 body {
-    background-color: lightblue;
+    background-image: url('../images/pink\ dust.png');
 }
 
 #quiz-container {
+padding: 5%;
+height: 50%;
+width: 50%;
+    text-align: center;
+    margin: auto;
+    margin-top: 10%;
+    background: rgb(39, 38, 39, 0.5);
+    color: rgb(165, 132, 134);
+}
+
+#start {
+    margin-top: 5%;
+    background: rgb(165, 132, 134);
+border: none;
+color: rgb(39, 38, 39);
+}
+
+
+#question {
+    color:  red;
     padding: auto;
     text-align: center;
+    margin: auto;
 }
