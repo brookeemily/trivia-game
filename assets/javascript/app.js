@@ -94,6 +94,7 @@ function gameOver() {
   $("#timer").hide();
   $("#results").hide();
   $("#choices").hide();
+  $("#start").show();
 }
 // console.log(quizItems);
 // console.log(quizItems[2].question);
@@ -134,10 +135,11 @@ function pickAnswer() {
     playerAnswers.push(quizItems[currentQuestion].choices[0]);
     console.log("player answers: " + playerAnswers);
 
+    stop();
+    reset();
+     
     checkAnswers();
-
-    currentQuestion++;
-    nextQuestion();
+    showAnswer();
   
   });
 
@@ -145,22 +147,25 @@ function pickAnswer() {
     // console.log(choice2);
     playerAnswers.push(quizItems[currentQuestion].choices[1]);
     console.log("player answers: " + playerAnswers);
-  
+    stop();
+    reset();
+
     checkAnswers();
-    
-    currentQuestion++;
-    nextQuestion();
+    showAnswer();
+
   });
 
   $("#choice3").click(function() {
     // console.log(choice3);
     playerAnswers.push(quizItems[currentQuestion].choices[2]);
     console.log("player answers: " + playerAnswers);
-  
-    checkAnswers();
     
-    currentQuestion++;
-    nextQuestion();
+    stop();
+    reset();
+
+    checkAnswers();
+    showAnswer();
+
 
   });
 
@@ -169,10 +174,11 @@ function pickAnswer() {
     playerAnswers.push(quizItems[currentQuestion].choices[3]);
     console.log("player answers: " + playerAnswers);
  
+    stop();
+    reset();
+
     checkAnswers();
-    
-    currentQuestion++;
-    nextQuestion();
+    showAnswer();
 
   });
 }
@@ -237,7 +243,7 @@ function timeConverter(t) {
 }
 
 function nextQuestion() {
-  if (currentQuestion <= 4) {
+  if ((right + wrong) <= 5) {
     reset();
     displayQuestions();
     displayChoices();
@@ -276,11 +282,13 @@ if (playerAnswers[currentQuestion] === correctAnswers[currentQuestion]) {
     console.log("correct :)");
     right++;
     console.log("right " + right);
+
 }
 if (playerAnswers[currentQuestion] !== correctAnswers[currentQuestion]) {
     console.log("incorrect :(");
     wrong++;
     console.log("wrong " + wrong);
+
   }
 }
 
@@ -303,12 +311,17 @@ $("#next").click(function() {
   $("#result").hide();
   $("#next").hide();
 
-  start();
-  currentQuestion++;
-  displayQuestions();
-  displayChoices();
+  if ((right + wrong) < 5) {  
+    start();
+    currentQuestion++;
+   displayQuestions();
+    displayChoices();
 }
-);
+else {
+  gameOver();
+}
+
+});
 
 
 // GAME OVER PAGE
