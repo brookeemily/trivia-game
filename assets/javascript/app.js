@@ -11,38 +11,7 @@ var currentQuestion = 0;
 
 var playerAnswers = [];
 
-
 var converted = timeConverter(time);
-
-$("#timer").text(converted);
-
-
-  // Hide all content except start button
-  $("#question").hide();
-  $("#timer").hide();
-  $("#results").hide();
-
-
-//When you click the start button....
-$("#start").click(function() {
-  // Set timer
-  time = 5;
-
-  // Hide the start button
-  $("#start").hide();
-
-
-  // Begin timer
-  // start();
-  // count();
-
-  // Display the first question
-  displayQuestions();
-  displayChoices();
-  pickAnswer();
-});
-
-
 
 // CREATE QUIZ
 
@@ -50,25 +19,25 @@ $("#start").click(function() {
 var right = 0;
 var wrong = 0;
 
-
 // // Create an array that contains the questions & answers
-var quizItems = [{
-  question: "This is a question",
-  
-  // add sound to each question?
+var quizItems = [
+  // {
+  //   question: "placeholder",
+  //   choices: ["placeholder", "placeholder", "placeholder", "placeholder"]
+  // },
+  {
+    question: "This is a question",
 
-  choices: [
+    // add sound to each question?
+
+    choices: [
       "This is an answer",
       "This is an answer",
       "This is THE answer",
       "This is an answer"
-]},
-
-//   correct: 
-//     "This is THE answer",
-// }
-    
-    ,{
+    ]
+  },
+  {
     question: "This is a question 2",
     // add sound to each question?
     choices: [
@@ -103,81 +72,96 @@ var quizItems = [{
     // add sound to each question?
     choices: [
       "This is an answer 5",
-      "This is an answe 5r",
+      "This is an answer 5",
       "This is THE answer 5",
       "This is an answer 5"
     ]
   }
 ];
 
-// console.log(quizItems);
-// console.log(quizItems[2].question);
-// console.log(quizItems[3].choices);
+$("#timer").text(converted);
 
-
-function displayQuestions () {
-
-// for (var i = 0; i < quizItems.length;) {
-$("#question").show();
-$("#question").text(quizItems[currentQuestion].question);
- 
-}
-
-
-function displayChoices() {
-  // for (var a = 0; a < quizItems.choices.length; a++) {
-    $("#choices").show();
-    $("#choice1").html(quizItems[currentQuestion].choices[0]);
-    $("#choice2").html(quizItems[currentQuestion].choices[1]);
-    $("#choice3").html(quizItems[currentQuestion].choices[2]);
-    $("#choice4").html(quizItems[currentQuestion].choices[3]);
-
-
-
-
-
-// if you click on a choice, push value to new array
-
-    
-  // }
-
-}
-
-function pickAnswer () {
-
-  $("#choice1").click(function() {
-    console.log(choice1);
-    nextQuestion();
- });
-
-$("#choice2").click(function() {
-  console.log(choice2); 
-  nextQuestion();
-});
-
-
-$("#choice3").click(function() {
-  console.log(choice3); 
-  nextQuestion();
-});
-
-  $("#choice4").click(function() {
-    console.log(choice4);   
-    nextQuestion();
-});
-
-
-}
+// Hide all content except start button
+$("#question").hide();
+$("#timer").hide();
+$("#choices").hide();
 
 function gameOver() {
   $("#question").hide();
   $("#timer").hide();
   $("#results").hide();
   $("#choices").hide();
-
   
+}
+// console.log(quizItems);
+// console.log(quizItems[2].question);
+// console.log(quizItems[3].choices);
 
+function displayQuestions() {
+  // for (var i = 0; i < quizItems.length;) {
+
+  if (currentQuestion >= 0) {
+    $("#question").show();
+    $("#question").html(quizItems[currentQuestion].question);
+    // console.log(quizItems[currentQuestion].question);
+    // console.log(currentQuestion);
+  
+}
+}
+
+function displayChoices() {
+  // for (var a = 0; a < quizItems.choices.length; a++) {
+  $("#choices").show();
+  $("#choice1").html(quizItems[currentQuestion].choices[0]);
+  $("#choice2").html(quizItems[currentQuestion].choices[1]);
+  $("#choice3").html(quizItems[currentQuestion].choices[2]);
+  $("#choice4").html(quizItems[currentQuestion].choices[3]);
+
+  if (currentQuestion > 5) {
+    gameOver();
   }
+
+  // if you click on a choice, push value to new array
+
+  // }
+}
+
+function pickAnswer() {
+  $("#choice1").click(function() {
+    // console.log(choice1);
+    playerAnswers.push(quizItems[currentQuestion].choices[0]);
+    console.log("player answers: " + playerAnswers);
+    currentQuestion++;
+    nextQuestion();
+  
+  });
+
+  $("#choice2").click(function() {
+    // console.log(choice2);
+    playerAnswers.push(quizItems[currentQuestion].choices[1]);
+    console.log("player answers: " + playerAnswers);
+    currentQuestion++;
+    nextQuestion();
+  });
+
+  $("#choice3").click(function() {
+    // console.log(choice3);
+    playerAnswers.push(quizItems[currentQuestion].choices[2]);
+    console.log("player answers: " + playerAnswers);
+    currentQuestion++;
+    nextQuestion();
+  });
+
+  $("#choice4").click(function() {
+    // console.log(choice4);
+    playerAnswers.push(quizItems[currentQuestion].choices[3]);
+    console.log("player answers: " + playerAnswers);
+    currentQuestion++;
+    nextQuestion();
+  });
+}
+
+
 
 // TIMER FUNCTIONS
 
@@ -189,7 +173,6 @@ function reset() {
   $("#question").empty();
   $("#answers").empty();
 }
-
 
 // Function starts timer
 function start() {
@@ -217,8 +200,7 @@ function count() {
   // }
   if (time === 0) {
     nextQuestion();
-    }
-    
+  }
 }
 
 // Converts timer
@@ -240,16 +222,36 @@ function timeConverter(t) {
 }
 
 function nextQuestion() {
-  if (currentQuestion <= 5) {
-    currentQuestion++;
-     displayQuestions();
-     displayChoices();
+  if (currentQuestion <= 4) {
+    displayQuestions();
+    displayChoices();
+    console.log(currentQuestion);
   } else {
     gameOver();
   }
-  
-
 }
+
+//When you click the start button....
+$("#start").click(function() {
+  // Set timer
+  time = 5;
+
+  // Hide the start button
+  $("#start").hide();
+
+  // Begin timer
+  // start();
+  // count();
+  // Display the first question
+  pickAnswer();
+
+  displayQuestions();
+  displayChoices();
+  nextQuestion();
+
+});
+
+
 
 //    // Check answers
 //    if (q1 === answers[0]) {
