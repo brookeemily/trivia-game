@@ -87,6 +87,7 @@ $("#timer").text(converted);
 $("#question").hide();
 $("#timer").hide();
 $("#choices").hide();
+$("#next").hide();
 
 function gameOver() {
   $("#question").hide();
@@ -207,15 +208,14 @@ function count() {
   var converted = timeConverter(time);
   $("#timer").text(converted);
 
-  // if (time === 0) {
-  //   stop();
-  //   reset();
-  //   start();
-  //   displayQuestions();
-  // }
   if (time === 0) {
-    nextQuestion();
+    stop();
+    reset();
+    showAnswer();
   }
+  // if (time === 0) {
+  //   nextQuestion();
+  // }
 }
 
 // Converts timer
@@ -238,6 +238,7 @@ function timeConverter(t) {
 
 function nextQuestion() {
   if (currentQuestion <= 4) {
+    reset();
     displayQuestions();
     displayChoices();
     console.log(currentQuestion);
@@ -246,6 +247,7 @@ function nextQuestion() {
   }
 }
 
+
 //When you click the start button....
 $("#start").click(function() {
   // Set timer
@@ -253,10 +255,11 @@ $("#start").click(function() {
 
   // Hide the start button
   $("#start").hide();
+  $("#timer").show();
 
   // Begin timer
-  // start();
-  // count();
+  start();
+  count();
   // Display the first question
   pickAnswer();
 
@@ -281,111 +284,31 @@ if (playerAnswers[currentQuestion] !== correctAnswers[currentQuestion]) {
   }
 }
 
+function showAnswer () {
+  $("#timer").hide();
+  $("#question").hide();
+  $("#choices").hide();
+  $("#answer").show();
+  $("#result").html("THIS IS THE RESULT!");
+  $("#description").html("this is the description!");
+  $("#next").show();
+  // currentQuestion++;
+  // nextQuestion();
+}
 
-//   // FIGURE OUT HOW TO SEE IF THEY MISSED QUESTIONS
-//   // if (q1 === null) {
-//   //     alert("question missed!");
+$("#next").click(function() {
+  $("#timer").show();
 
-//   // }
+  $("#answer").hide();
+  $("#result").hide();
+  $("#next").hide();
 
-//   if (q2 === answers[1]) {
-//     console.log("question2 correct!");
-//     right++;
-//   }
-//   if (q2 !== answers[1]) {
-//     console.log("question2 incorrect :(");
-//     wrong++;
-//   }
-
-//   if (q3 === answers[2]) {
-//     console.log("question3 correct!");
-//     right++;
-//   }
-//   if (q3 !== answers[2]) {
-//     console.log("question3 incorrect :(");
-
-//     wrong++;
-//   }
-//   if (q4 === answers[3]) {
-//     console.log("question4 correct!");
-//     right++;
-//   }
-//   if (q4 !== answers[3]) {
-//     console.log("question4 incorrect :(");
-//     wrong++;
-//   }
-
-//   if (q5 === answers[4]) {
-//     console.log("question5 correct!");
-//     right++;
-//   }
-//   if (q5 !== answers[4]) {
-//     console.log("question5 incorrect :(");
-//     wrong++;
-//   }
-// }
-// );
-
-// function checkAnswers() {
-//   // Check answers
-//   if (q1 === answers[0]) {
-//     console.log("question1 correct!");
-//     right++;
-//   }
-//   if (q1 !== answers[0]) {
-//     console.log("question1 incorrect :(");
-//     wrong++;
-//   }
-//   // FIGURE OUT HOW TO SEE IF THEY MISSED QUESTIONS
-//   // if (q1 === null) {
-//   //     alert("question missed!");
-
-//   // }
-
-//   if (q2 === answers[1]) {
-//     console.log("question2 correct!");
-//     right++;
-//   }
-//   if (q2 !== answers[1]) {
-//     console.log("question2 incorrect :(");
-//     wrong++;
-//   }
-
-//   if (q3 === answers[2]) {
-//     console.log("question3 correct!");
-//     right++;
-//   }
-//   if (q3 !== answers[2]) {
-//     console.log("question3 incorrect :(");
-
-//     wrong++;
-//   }
-//   if (q4 === answers[3]) {
-//     console.log("question4 correct!");
-//     right++;
-//   }
-//   if (q4 !== answers[3]) {
-//     console.log("question4 incorrect :(");
-//     wrong++;
-//   }
-
-//   if (q5 === answers[4]) {
-//     console.log("question5 correct!");
-//     right++;
-//   }
-//   if (q5 !== answers[4]) {
-//     console.log("question5 incorrect :(");
-//     wrong++;
-//   }
-// }
-
-// // Check if answer for each question is correct
-
-// if ( === correct
-//     // right++
-// // if player one !== correct
-//     // wrong++
-
+  start();
+  currentQuestion++;
+  displayQuestions();
+  displayChoices();
+}
+);
 
 
 // GAME OVER PAGE
