@@ -13,8 +13,15 @@ var playerAnswers = [];
 
 var converted = timeConverter(time);
 
-var correctAnswers = ["This is THE answer", "This is THE answer 2", "This is THE answer 3", "This is THE answer 4", "This is THE answer 5"];
+var correctAnswers = [
+  "I set my clocks early 'cause I know I'm always late", 
+  "Why don't you show me that little bit of spine you've been saving for his mattress?", 
+  "A teenage vow in a parking lot, ’Til tonight do us part", 
+  "A loaded god complex, cock it and pull it", 
+  "I'm the leading man, and the lies I weave are oh, so intricate, oh, so intricate"
+];
 
+var gifs = ["assets/images/alittleless.gif","assets/images/dancedance.gif","assets/images/hum.gif","assets/images/sugar.gif","assets/images/thisaintascene.gif",];
 // CREATE QUIZ
 
 // var currentQuestion = 0;
@@ -28,55 +35,55 @@ var quizItems = [
   //   choices: ["placeholder", "placeholder", "placeholder", "placeholder"]
   // },
   {
-    question: "This is a question",
+    question: "What's the lyric from 'A Little Less Sixteen Candles, A Little More Touch Me?'",
 
     // add sound to each question?
 
     choices: [
-      "This is an answer",
-      "This is an answer",
-      "This is THE answer",
-      "This is an answer"
+"I send my cards early 'cause I know I'm always late",
+"I set my clocks early 'cause I know I'm always late",
+"My salmon comes early cause I know I’m always late",
+"Send the cops early cause you know I’m always late"    ]
+  },
+  {
+    question: "What's the lyric from Dance Dance?",
+    // add sound to each question?
+    choices: [
+      "Why don't you show me the little bit of spark you've been saving for his mattress?",
+      "Why don't you show me that little bit of spine you've been saving for his mattress?",
+     "Why don't you show me, that little bit of spunk you've been saving for his bed arrest?",
+    "Why don’t you show me, little British toy you've been staying for his mattress?"
     ]
   },
   {
-    question: "This is a question 2",
+    question: "What's the lyric from Hum Hallelujah?",
     // add sound to each question?
     choices: [
-      "This is an answer 2",
-      "This is an answer 2",
-      "This is THE answer 2",
-      "This is an answer 2"
+      "A teenager in a parking lot, 'Til tonight, she was bored",
+      "A teenage love in a parking lot, 'Til tonight do us part",
+      "A teenager in a parking lot, ’Til tonight, she was poor",
+      "A teenage vow in a parking lot, ’Til tonight do us part"
     ]
   },
   {
-    question: "This is a question 3",
+    question: "What's the lyric from Sugar We're Goin Down?",
     // add sound to each question?
     choices: [
-      "This is an answer 3",
-      "This is an answer 3",
-      "This is THE answer 3",
-      "This is an answer 3"
+      "A loaded god complex, cock it and pull it",
+      "I know you got cornflakes, cocky and bullied",
+      "A loaded gun complex, cock it and pull it",
+      "A lollipop complex, cook it in puddin'"
     ]
   },
   {
-    question: "This is a question 4",
+    question: "What's the lyric from This Ain't a Scene, It's an Arms Race?",
     // add sound to each question?
-    choices: [
-      "This is an answer 4",
-      "This is an answer 4",
-      "This is THE answer 4",
-      "This is an answer 4"
-    ]
-  },
-  {
-    question: "This is a question 5",
-    // add sound to each question?
-    choices: [
-      "This is an answer 5",
-      "This is an answer 5",
-      "This is THE answer 5",
-      "This is an answer 5"
+    choices: [ 
+      "I'm a lying man and the lies I weaveare oh, so intricate, oh, so intricate",
+      "I'm a little man, and I'm also evil, also into cats, also into cats.",      
+      "I'm the leading man, and the lies I weave are oh, so intricate, oh, so intricate",
+      "I'm not leaving man and the lives I leave are also in Japan, also in Japan"
+     
     ]
   }
 ];
@@ -88,13 +95,18 @@ $("#question").hide();
 $("#timer").hide();
 $("#choices").hide();
 $("#next").hide();
+$("#game-over").hide();
+
 
 function gameOver() {
   $("#question").hide();
   $("#timer").hide();
   $("#results").hide();
   $("#choices").hide();
-  $("#start").show();
+  $("#game-over").show();
+  $("#right").text("Correct: " + right);
+  $("#wrong").text("Inorrect: " + wrong);
+
 }
 // console.log(quizItems);
 // console.log(quizItems[2].question);
@@ -105,6 +117,9 @@ function displayQuestions() {
 
   if (currentQuestion >= 0) {
     $("#question").show();
+    $("#gif").show();
+    displayImage();
+
     $("#question").html(quizItems[currentQuestion].question);
     // console.log(quizItems[currentQuestion].question);
     // console.log(currentQuestion);
@@ -183,15 +198,17 @@ function pickAnswer() {
   });
 }
 
-
+function displayImage() {
+  $("#gif").html("<img src=" + gifs[currentQuestion] + " width='400px'>");
+}
 
 // TIMER FUNCTIONS
 
 // Reset function for timer
 function reset() {
   // Start time at 30 seconds
-  time = 5;
-  $("#timer").text("00:05");
+  time = 45;
+  $("#timer").text("00:45");
   $("#question").empty();
   $("#answers").empty();
 }
@@ -217,12 +234,22 @@ function count() {
   if (time === 0) {
     stop();
     reset();
+    playerAnswers.push("too slow!");
+    console.log(playerAnswers);
+
     showAnswer();
   }
-  // if (time === 0) {
-  //   nextQuestion();
-  // }
+  
 }
+
+// function timeForAnswer () {
+//   count();
+
+
+//   if (time === 0) {
+//     nextQuestion ();
+//   }
+// }
 
 // Converts timer
 function timeConverter(t) {
@@ -243,7 +270,7 @@ function timeConverter(t) {
 }
 
 function nextQuestion() {
-  if ((right + wrong) <= 5) {
+  if (currentQuestion <= 5) {
     reset();
     displayQuestions();
     displayChoices();
@@ -257,7 +284,7 @@ function nextQuestion() {
 //When you click the start button....
 $("#start").click(function() {
   // Set timer
-  time = 5;
+  time = 45;
 
   // Hide the start button
   $("#start").hide();
@@ -271,10 +298,16 @@ $("#start").click(function() {
 
   displayQuestions();
   displayChoices();
-  nextQuestion();
+  // nextQuestion();
 
 });
 
+$("#restart").click(function() {
+// Set timer
+document.location.reload(true);
+
+
+});
 
 function checkAnswers () {
 //    // Check answers
@@ -293,15 +326,57 @@ if (playerAnswers[currentQuestion] !== correctAnswers[currentQuestion]) {
 }
 
 function showAnswer () {
+
+
   $("#timer").hide();
   $("#question").hide();
   $("#choices").hide();
   $("#answer").show();
-  $("#result").html("THIS IS THE RESULT!");
-  $("#description").html("this is the description!");
   $("#next").show();
+  $("#result").show();
+  $("#description").show();
+
+
+
+  if (playerAnswers[currentQuestion] === correctAnswers[currentQuestion]) {
+    $("#result").html("CORRECT!");
+  $("#description").html("this is the description!");
+  }
+if (playerAnswers[currentQuestion] !== correctAnswers[currentQuestion]) {
+  $("#result").html("INCORRECT! :(");
+  $("#description").html("this is the description!");
+
+  }
+
+
+ 
+// }
+
+//   $("#timer").hide();
+
+//   time = 3
+//   start();
+
+
+//   if (time === 0) {
+//     $("#timer").show();
+
+//     $("#answer").hide();
+//     $("#result").hide();
+//     $("#next").hide();
+
+//       start();
+//        displayQuestions();
+//         displayChoices();
+//   }
+
+  
+
+currentQuestion++;
+console.log(currentQuestion);
   // currentQuestion++;
   // nextQuestion();
+
 }
 
 $("#next").click(function() {
@@ -311,9 +386,8 @@ $("#next").click(function() {
   $("#result").hide();
   $("#next").hide();
 
-  if ((right + wrong) < 5) {  
-    start();
-    currentQuestion++;
+  if (currentQuestion < 5) {  
+  start();
    displayQuestions();
     displayChoices();
 }
