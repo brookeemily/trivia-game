@@ -13,6 +13,8 @@ var playerAnswers = [];
 
 var converted = timeConverter(time);
 
+var correctAnswers = ["This is THE answer", "This is THE answer 2", "This is THE answer 3", "This is THE answer 4", "This is THE answer 5"];
+
 // CREATE QUIZ
 
 // var currentQuestion = 0;
@@ -91,7 +93,6 @@ function gameOver() {
   $("#timer").hide();
   $("#results").hide();
   $("#choices").hide();
-  
 }
 // console.log(quizItems);
 // console.log(quizItems[2].question);
@@ -105,7 +106,7 @@ function displayQuestions() {
     $("#question").html(quizItems[currentQuestion].question);
     // console.log(quizItems[currentQuestion].question);
     // console.log(currentQuestion);
-  
+    
 }
 }
 
@@ -131,6 +132,9 @@ function pickAnswer() {
     // console.log(choice1);
     playerAnswers.push(quizItems[currentQuestion].choices[0]);
     console.log("player answers: " + playerAnswers);
+
+    checkAnswers();
+
     currentQuestion++;
     nextQuestion();
   
@@ -140,6 +144,9 @@ function pickAnswer() {
     // console.log(choice2);
     playerAnswers.push(quizItems[currentQuestion].choices[1]);
     console.log("player answers: " + playerAnswers);
+  
+    checkAnswers();
+    
     currentQuestion++;
     nextQuestion();
   });
@@ -148,16 +155,24 @@ function pickAnswer() {
     // console.log(choice3);
     playerAnswers.push(quizItems[currentQuestion].choices[2]);
     console.log("player answers: " + playerAnswers);
+  
+    checkAnswers();
+    
     currentQuestion++;
     nextQuestion();
+
   });
 
   $("#choice4").click(function() {
     // console.log(choice4);
     playerAnswers.push(quizItems[currentQuestion].choices[3]);
     console.log("player answers: " + playerAnswers);
+ 
+    checkAnswers();
+    
     currentQuestion++;
     nextQuestion();
+
   });
 }
 
@@ -252,16 +267,21 @@ $("#start").click(function() {
 });
 
 
-
+function checkAnswers () {
 //    // Check answers
-//    if (q1 === answers[0]) {
-//     console.log("question1 correct!");
-//     right++;
-//   }
-//   if (q1 !== answers[0]) {
-//     console.log("question1 incorrect :(");
-//     wrong++;
-//   }
+if (playerAnswers[currentQuestion] === correctAnswers[currentQuestion]) {
+    console.log("correct :)");
+    right++;
+    console.log("right " + right);
+}
+if (playerAnswers[currentQuestion] !== correctAnswers[currentQuestion]) {
+    console.log("incorrect :(");
+    wrong++;
+    console.log("wrong " + wrong);
+  }
+}
+
+
 //   // FIGURE OUT HOW TO SEE IF THEY MISSED QUESTIONS
 //   // if (q1 === null) {
 //   //     alert("question missed!");
@@ -366,7 +386,7 @@ $("#start").click(function() {
 // // if player one !== correct
 //     // wrong++
 
-// });
+
 
 // GAME OVER PAGE
 // if the time = 0, append results
