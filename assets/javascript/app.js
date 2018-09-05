@@ -12,6 +12,8 @@ var currentQuestion = 0;
 var playerAnswers = [];
 
 var converted = timeConverter(time);
+var audioElement = document.createElement("audio");
+
 
 var correctAnswers = [
   "I set my clocks early 'cause I know I'm always late", 
@@ -22,6 +24,9 @@ var correctAnswers = [
 ];
 
 var gifs = ["assets/images/alittleless.gif","assets/images/dancedance.gif","assets/images/hum.gif","assets/images/sugar.gif","assets/images/thisaintascene.gif",];
+var correctGifs = ["assets/images/yay.gif", "assets/images/celebrate.gif", "assets/images/good.gif", "assets/images/clap.gif", "assets/images/yup.gif"];
+var incorrectGifs = ["assets/images/nope.gif", "assets/images/nah.gif", "assets/images/no.gif", "assets/images/incorrect.gif", "assets/images/wrong.gif" ];
+var audio = ["assets/audio/16candles.m4a","assets/audio/dance.m4a","assets/audio/hum.m4a","assets/audio/sugar.m4a","assets/audio/arms.m4a",]
 // CREATE QUIZ
 
 // var currentQuestion = 0;
@@ -104,6 +109,8 @@ function gameOver() {
   $("#results").hide();
   $("#choices").hide();
   $("#game-over").show();
+  $("#gif").html("<img src=assets/images/nice.gif"  + " width='400px'>");
+
   $("#right").text("Correct: " + right);
   $("#wrong").text("Inorrect: " + wrong);
 
@@ -119,6 +126,9 @@ function displayQuestions() {
     $("#question").show();
     $("#gif").show();
     displayImage();
+    audioElement.setAttribute("src", audio[currentQuestion]);
+    audioElement.play();
+
 
     $("#question").html(quizItems[currentQuestion].question);
     // console.log(quizItems[currentQuestion].question);
@@ -339,10 +349,16 @@ function showAnswer () {
 
 
   if (playerAnswers[currentQuestion] === correctAnswers[currentQuestion]) {
+    $("#gif").html("<img src=" +   correctGifs[currentQuestion] + " width='400px'>");
+    // items[Math.floor(Math.random()*items.length)];
+
     $("#result").html("CORRECT!");
   $("#description").html("this is the description!");
   }
 if (playerAnswers[currentQuestion] !== correctAnswers[currentQuestion]) {
+  $("#gif").html("<img src=" +   incorrectGifs[currentQuestion] + " width='400px'>");
+
+
   $("#result").html("INCORRECT! :(");
   $("#description").html("this is the description!");
 
