@@ -27,6 +27,7 @@ var gifs = ["assets/images/alittleless.gif","assets/images/dancedance.gif","asse
 var correctGifs = ["assets/images/yay.gif", "assets/images/celebrate.gif", "assets/images/good.gif", "assets/images/clap.gif", "assets/images/yup.gif"];
 var incorrectGifs = ["assets/images/nope.gif", "assets/images/nah.gif", "assets/images/no.gif", "assets/images/incorrect.gif", "assets/images/wrong.gif" ];
 var audio = ["assets/audio/16candles.m4a","assets/audio/dance.m4a","assets/audio/hum.m4a","assets/audio/sugar.m4a","assets/audio/arms.m4a",]
+
 // CREATE QUIZ
 
 // var currentQuestion = 0;
@@ -84,7 +85,7 @@ var quizItems = [
     question: "What's the lyric from This Ain't a Scene, It's an Arms Race?",
     // add sound to each question?
     choices: [ 
-      "I'm a lying man and the lies I weaveare oh, so intricate, oh, so intricate",
+      "I'm a lying man and the lies I weave are oh, so intricate, oh, so intricate",
       "I'm a little man, and I'm also evil, also into cats, also into cats.",      
       "I'm the leading man, and the lies I weave are oh, so intricate, oh, so intricate",
       "I'm not leaving man and the lives I leave are also in Japan, also in Japan"
@@ -217,8 +218,8 @@ function displayImage() {
 // Reset function for timer
 function reset() {
   // Start time at 30 seconds
-  time = 45;
-  $("#timer").text("00:45");
+  time = 25;
+  $("#timer").text("00:25");
   $("#question").empty();
   $("#answers").empty();
 }
@@ -227,6 +228,8 @@ function reset() {
 function start() {
   intervalId = setInterval(count, 1000);
   $("#timer").show("0:05");
+
+
 }
 
 // Function stops timer
@@ -294,7 +297,7 @@ function nextQuestion() {
 //When you click the start button....
 $("#start").click(function() {
   // Set timer
-  time = 45;
+  time = 25;
 
   // Hide the start button
   $("#start").hide();
@@ -353,14 +356,14 @@ function showAnswer () {
     // items[Math.floor(Math.random()*items.length)];
 
     $("#result").html("CORRECT!");
-  $("#description").html("this is the description!");
+  $("#description").html("You got it!");
   }
 if (playerAnswers[currentQuestion] !== correctAnswers[currentQuestion]) {
   $("#gif").html("<img src=" +   incorrectGifs[currentQuestion] + " width='400px'>");
 
 
   $("#result").html("INCORRECT! :(");
-  $("#description").html("this is the description!");
+  $("#description").html("Nope! It's actually '" + correctAnswers[currentQuestion] + "'");
 
   }
 
