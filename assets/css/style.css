@@ -7,12 +7,12 @@ body {
 }
 
 #quiz-container {
-padding: 5%;
-height: 75%;
+padding-top: 75px;
+height: 100%;
 width: 75%;
     text-align: center;
     margin: auto;
-    margin-top: 10%;
+    margin-top: 5%;
     margin-bottom: 10%;
     background: rgb(39, 38, 39, 0.5);
     color: rgb(165, 132, 134);
@@ -31,4 +31,9 @@ color: rgb(39, 38, 39);
     padding: auto;
     text-align: center;
     margin: auto;
+}
+
+
+#gif {
+    margin: 5%;
 }
