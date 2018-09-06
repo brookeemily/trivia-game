@@ -8,16 +8,17 @@ body {
 
 #quiz-container {
 padding: 5%;
-height: 50%;
-width: 50%;
+height: 75%;
+width: 75%;
     text-align: center;
     margin: auto;
     margin-top: 10%;
+    margin-bottom: 10%;
     background: rgb(39, 38, 39, 0.5);
     color: rgb(165, 132, 134);
 }
 
-#start {
+#start, #next, #restart {
     margin-top: 5%;
     background: rgb(165, 132, 134);
 border: none;
@@ -26,7 +27,7 @@ color: rgb(39, 38, 39);
 
 
 #question {
-    color:  red;
+    color:  rgb(165, 132, 134);
     padding: auto;
     text-align: center;
     margin: auto;

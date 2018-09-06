@@ -210,7 +210,7 @@ function pickAnswer() {
 }
 
 function displayImage() {
-  $("#gif").html("<img src=" + gifs[currentQuestion] + " width='400px'>");
+  $("#gif").html("<img src=" + gifs[currentQuestion] + ">");
 }
 
 // TIMER FUNCTIONS
@@ -301,6 +301,8 @@ $("#start").click(function() {
 
   // Hide the start button
   $("#start").hide();
+  $("#instructions").hide();
+
   $("#timer").show();
 
   // Begin timer
@@ -352,14 +354,14 @@ function showAnswer () {
 
 
   if (playerAnswers[currentQuestion] === correctAnswers[currentQuestion]) {
-    $("#gif").html("<img src=" +   correctGifs[currentQuestion] + " width='400px'>");
+    $("#gif").html("<img src=" +   correctGifs[currentQuestion] + ">");
     // items[Math.floor(Math.random()*items.length)];
 
     $("#result").html("CORRECT!");
   $("#description").html("You got it!");
   }
 if (playerAnswers[currentQuestion] !== correctAnswers[currentQuestion]) {
-  $("#gif").html("<img src=" +   incorrectGifs[currentQuestion] + " width='400px'>");
+  $("#gif").html("<img src=" +   incorrectGifs[currentQuestion] + ">");
 
 
   $("#result").html("INCORRECT! :(");
